@@ -5,7 +5,7 @@ package com.report.enums;
  */
 
 public enum GlobalEnum {
-    ;
+    QUERY_SUCCESS("查询成功!");
     private String message;
 
     GlobalEnum(String message) {
