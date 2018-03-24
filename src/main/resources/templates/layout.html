@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+
+    <meta charset="utf-8"/>
+    <title>首页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="./../webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+
+    <style type="text/css">
+        body {
+            font-family: 微软雅黑;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div th:fragment="topnav">
+    <nav class="navbar navbar-default" style="background: none repeat scroll 0 0 #394755;color:#fff;height:60px;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" style="margin-right:20%;">
+                <a class="navbar-brand" href="/mainframe" style="color:#fff;">大数据报告</a>
+            </div>
+          <!-- 退出 -->
+            <a class="navbar-brand" href="#" style="color:#fff;float:right;"
+               onclick="javascript:safeLogoutFun();">退出</a>
+            <!-- 欢迎语 -->
+            <div class="navbar-brand" style="margin-right:30px;font-size:15px;float:right;color:#f5d313;">
+                欢迎您,<span th:text="${session.LoginUser.user_name}">亲爱的用户</span> 现在是
+                <span id="time"></span>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    function setTime() {
+                        var dt = new Date();
+                        var arr_week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+                        var strWeek = arr_week[dt.getDay()];
+                        var strHour = dt.getHours();
+                        var strMinutes = dt.getMinutes();
+                        var strSeconds = dt.getSeconds();
+                        if (strMinutes < 10) strMinutes = "0" + strMinutes;
+                        if (strSeconds < 10) strSeconds = "0" + strSeconds;
+                        var strYear = dt.getFullYear() + "年";
+                        var strMonth = (dt.getMonth() + 1) + "月";
+                        var strDay = dt.getDate() + "日";
+                        var strTime = strHour + ":" + strMinutes + ":" + strSeconds;
+                        time.innerHTML = strYear + strMonth + strDay + " " + strTime + "  " + strWeek;
+                    }
+                    setInterval("setTime()", 1000);
+                    // 安全退出
+                    function safeLogoutFun() {
+                        if (confirm("确定需要退出吗？")) {
+                            $.ajax({
+                                type: "POST",
+                                url: "safeLogout",
+                                dataType: "json",
+                                error: function () {
+                                    alert("退出失败");
+                                },
+                                success: function (responseInfo) {
+                                    //
+                                    if (responseInfo.status == 0) {
+                                        window.location.replace("index");
+                                        //window.event.returnValue = false;//取消默认事件的处理
+                                    }
+
+                                    //
+                                    if (responseInfo.status == 1) {
+                                        alert("退出失败");
+                                    }
+                                }
+                            });//end ajax
+                        }//end if confirm
+                    }
+                    /*]]>*/
+                </script>
+            </div>
+
+        </div>
+    </nav>
+</div> <!-- 导航条 -->
+<div layout:fragment="content"></div>
+<!-- put the scripts below -->
+<script src="./../webjars/jquery/3.0.0/jquery.min.js" th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script src="./../webjars/bootstrap/3.3.6/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

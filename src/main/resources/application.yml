@@ -1,0 +1,38 @@
+spring:
+  aop:
+    auto: true
+    proxy-target-class: true
+  application:
+    name: report
+  data:
+     rest:
+       base-path: /api
+  datasource:
+      name: datasource
+  jackson:
+    date-format:  yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  mvc:
+     locale: zh_CN
+     date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+      active: prod
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+  security:
+    user:
+      name: root
+      password: root
+server:
+  port: 1314
+  servlet:
+     context-path: /${spring.application.name}
+  tomcat:
+    basedir: ${user.home}/${spring.application.name}/tomcat
