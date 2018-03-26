@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 
 /**
@@ -73,11 +73,13 @@ public class ReportTemplate implements Serializable {
      * 模板路径
      * 当模板为online时则为空
      */
+    @Column(length = 1000, columnDefinition = "VARCHAR (1000) COMMENT '模板路径'")
     private String templatePath;
     /**
      * 备注
      */
     @Length(max = 4000, message = "模板备注不能多于4000个字符")
+    @Column(length = 4000, columnDefinition = "VARCHAR (4000) COMMENT '备注'")
     private String remark;
 
     /**
@@ -85,17 +87,19 @@ public class ReportTemplate implements Serializable {
      * 同一报告只能由创建者更新
      */
     @NotBlank(message = "用户ID不能为空!")
+    @Column(length = 1000, columnDefinition = "VARCHAR (1000) COMMENT '用户ID'")
     private String userId;
     /**
      * 创建时间
      */
-    private Date createTime;
+    private Timestamp createTime;
 
     /**
      * 更新时间
      */
     @Builder.Default
-    private Date updateTime = new Date();
+    @Column(name = "update_time", columnDefinition = "timestamp default CURRENT_TIMESTAMP")
+    private Timestamp updateTime = new Timestamp(System.nanoTime());
 
     /**
      * 更新次数
