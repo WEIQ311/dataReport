@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<html lang="zh_CN">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>首页</title>
+    <!--[if lte IE 8]>
+    <script th:src="@{/js/ie/html5shiv.js}"></script><![endif]-->
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" th:href="@{/css/ie8.css}"/><![endif]-->
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" th:href="@{/css/ie9.css}"/><![endif]-->
 </head>
-<body>
-欢迎使用到数据报告系统
+<body class="landing">
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+    <!-- Header -->
+    <header id="header" class="alt">
+        <h1><a th:href="@{/}">大数据报告</a></h1>
+        <nav id="nav">
+            <ul>
+                <li class="special">
+                    <a href="#menu" class="menuToggle"><span>菜单</span></a>
+                    <div id="menu">
+                        <ul>
+                            <li><a th:href="@{/}">主页</a></li>
+                            <li><a href="javascript:void (0);">报告设置</a></li>
+                            <li><a href="javascript:void (0);">模板设置</a></li>
+                            <li><a href="javascript:void (0);">邮件设置</a></li>
+                            <li><a href="javascript:void (0);">登陆</a></li>
+                            <li><a href="javascript:void (0);">登出</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section id="banner">
+        <div class="inner">
+            <h2>大数据报告</h2>
+            <p>
+                数据可视化
+                <br/>
+                报告定时邮件发送
+            </p>
+            <ul class="actions">
+                <li><a href="#" class="button special">欢迎使用大数据报告系统</a></li>
+            </ul>
+        </div>
+        <a href="#one" class="more scrolly">Learn More</a>
+    </section>
+    <section id="one" class="wrapper style1 special">
+        <div class="inner">
+            <header class="major">
+                <h2>大数据报告<br/>
+                    数据可视化与数据分析</h2>
+                <p>支持多数据源、实时、定时生成报告<br/>
+                    报告模板完全自定义、报告内容丰富包括、报告文件类型多样<br/>
+                    报告提供下载、邮件定时发送
+                </p>
+            </header>
+            <ul class="icons major">
+                <li><span class="icon fa-diamond major style1"><span class="label">Lorem</span></span></li>
+                <li><span class="icon fa-heart-o major style2"><span class="label">Ipsum</span></span></li>
+                <li><span class="icon fa-code major style3"><span class="label">Dolor</span></span></li>
+            </ul>
+        </div>
+    </section>
+    <footer id="footer">
+        <ul class="copyright">
+            <li>&copy; 大数据报告</li>
+            <li>Design: weiqiang <a href="http://bonce.5166.info/report/" target="_blank" title="大数据报告">大数据报告</a></li>
+        </ul>
+    </footer>
+</div>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.scrollex.min.js}"></script>
+<script th:src="@{/js/jquery.scrolly.min.js}"></script>
+<script th:src="@{/js/skel.min.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<!--[if lte IE 8]>
+<script th:src="@{/js/ie/respond.min.js}"></script><![endif]-->
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>
