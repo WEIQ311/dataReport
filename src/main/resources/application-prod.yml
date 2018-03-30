@@ -12,7 +12,7 @@ spring:
   jpa:
     database: MYSQL
     showSql: true
-#    hibernate:
-#      ddl-auto: update
+    hibernate:
+      ddl-auto: update
   social:
     auto-connection-views: true

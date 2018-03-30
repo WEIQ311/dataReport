@@ -17,5 +17,5 @@ public interface ReportTemplateRepository extends JpaRepository<ReportTemplate, 
      * @param pageable
      * @return
      */
-     Page<ReportTemplate> findByTemplateNameLikeOrderByUpdateTimeDesc(String templateName, Pageable pageable);
+    Page<ReportTemplate> findByTemplateNameLikeOrderByUpdateTimeDesc(String templateName, Pageable pageable);
 }

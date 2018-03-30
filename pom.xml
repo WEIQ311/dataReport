@@ -24,6 +24,7 @@
         <maven.compiler.version>3.7.0</maven.compiler.version>
         <java.version>1.8</java.version>
         <aspose.version>16.4.0</aspose.version>
+        <commons.version>2.6</commons.version>
         <druid.version>1.1.9</druid.version>
         <lombok.version>1.16.18</lombok.version>
         <fastjson.version>1.2.9</fastjson.version>
@@ -90,6 +91,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+        <!--mail-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
         <!--devtools-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -138,6 +144,11 @@
             <artifactId>aspose-words</artifactId>
             <version>${aspose.version}</version>
             <classifier>jdk16</classifier>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons.version}</version>
         </dependency>
     </dependencies>
     <build>
