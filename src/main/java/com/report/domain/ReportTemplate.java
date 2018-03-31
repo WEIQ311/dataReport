@@ -58,7 +58,7 @@ public class ReportTemplate implements Serializable {
      */
     @NotBlank(message = "模板类型不能为空!")
     @Builder.Default
-    @ColumnDefault(value = "html")
+    @ColumnDefault(value = "'html'")
     private String templateType = "html";
 
     /**
@@ -66,7 +66,7 @@ public class ReportTemplate implements Serializable {
      * 默认提供online
      */
     @Builder.Default
-    @ColumnDefault(value = "online")
+    @ColumnDefault(value = "'online'")
     private String templateModel = "online";
 
     /**

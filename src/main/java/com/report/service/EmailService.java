@@ -1,6 +1,7 @@
 package com.report.service;
 
 
+import com.report.domain.MailConfig;
 import com.report.vo.Pair;
 import com.report.vo.ResultEntity;
 
@@ -44,4 +45,11 @@ public interface EmailService {
      * @return
      */
     ResultEntity sendTemplateMail(String sendTo, String title, Map<String, Object> content, List<Pair<String, File>> attachments);
+
+    /**
+     * 发送邮件
+     * @param mailConfig
+     * @return
+     */
+    ResultEntity sendTemplateMail(MailConfig mailConfig);
 }
