@@ -48,6 +48,7 @@ public interface EmailService {
 
     /**
      * 发送邮件
+     *
      * @param mailConfig
      * @return
      */
