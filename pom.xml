@@ -30,6 +30,7 @@
         <fastjson.version>1.2.9</fastjson.version>
         <bootstrap.version>3.3.6</bootstrap.version>
         <jquery.version>3.0.0</jquery.version>
+        <nekohtml.version>1.9.22</nekohtml.version>
     </properties>
     <dependencies>
         <dependency>
@@ -145,10 +146,17 @@
             <version>${aspose.version}</version>
             <classifier>jdk16</classifier>
         </dependency>
+        <!--commons-lang-->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${commons.version}</version>
+        </dependency>
+        <!-- thymeleaf模板对没有结束符的HTML5标签解析出错的解决办法-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>${nekohtml.version}</version>
         </dependency>
     </dependencies>
     <build>

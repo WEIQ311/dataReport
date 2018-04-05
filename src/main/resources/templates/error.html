@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>出错啦</title>
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+<body>
+<div class="error_ex">
+    <h1 th:if="${status}eq null">404</h1>
+    <h1 th:if="${status}ne null" th:text="${status}"></h1>
+    <h3>噢,完蛋了!</h3>
+    <p th:if="${message}eq null or ${path} eq null">您打开的页面已经飞到火星去了,站长没能力上去,所以找不到了!</p>
+    <p th:if="${message}ne null and ${path} ne null" th:utext="'请求路径:'+${path}+'&emsp;错误原因:'+${message}">
+        您打开的页面已经飞到火星去了,站长没能力上去,所以找不到了!</p>
+    <p th:text="${#dates.format(timestamp,'yyyy-MM-dd HH:mm:ss')}"></p>
+    <a class="btn-warning" th:href="@{/index}">返回首页</a>
+</div>
+</body>
+</html>

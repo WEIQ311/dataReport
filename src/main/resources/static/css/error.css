@@ -1,0 +1,46 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+
+h3 {
+    font-size: 24.5px;
+}
+
+h1, h3 {
+    line-height: 40px;
+}
+
+h1, h3 {
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 20px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+}
+
+.btn-warning {
+    display: inline-block;
+    padding: 7px 10px;
+    margin: 0px 10px 0;
+    background: #fa7430;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-warning:hover {
+    background: #f45b0d;
+}
+
+.error_ex {
+    text-align: center;
+}
+
+.error_ex h1 {
+    font-size: 140px;
+    font-weight: bold;
+    padding: 50px 0;
+    color: #28B779
+}

@@ -24,15 +24,15 @@ public class GloabalUtils {
      */
     public static final String LINUX_NAME = "linux";
 
-    public static final int EIGHT = 8;
-    public static final int NINE = 9;
-    public static final int TEN = 10;
-    public static final int TWELVE = 12;
-    public static final String GLOABAL_DAY = "day";
-    public static final String GLOABAL_HOUR = "hour";
-    public static final String GLOABAL_MINUTE = "minute";
-    public static final String GLOABAL_SECOND = "second";
-    public static final String IS_ENABLE = "isEnable";
+    /**
+     * 请求类型
+     */
+    public static final String X_REQUESTED_WIDTH = "X-Requested-With";
+
+    /**
+     * xml请求
+     */
+    public static final String XML_HTTP_REQUEST = "XMLHttpRequest";
 
     /**
      * 获取IP地址
@@ -106,4 +106,18 @@ public class GloabalUtils {
         }
         return path;
     }
+
+    /**
+     * 判断是否ajax请求.
+     * 可以看到Ajax 请求多了个 x-requested-with ，可以利用它，
+     * request.getHeader("x-requested-with"); 为 null，则为传统同步请求，为 XMLHttpRequest，则为Ajax 异步请求。
+     *
+     * @param request HttpServletRequest
+     * @return 是否ajax请求.
+     */
+    public static boolean isAjaxRequest(HttpServletRequest request) {
+        String xr = request.getHeader(X_REQUESTED_WIDTH);
+        return (xr != null && XML_HTTP_REQUEST.equalsIgnoreCase(xr));
+    }
+
 }
