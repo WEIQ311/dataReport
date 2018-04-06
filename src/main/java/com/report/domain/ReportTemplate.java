@@ -105,6 +105,7 @@ public class ReportTemplate implements Serializable {
      * 更新次数
      */
     @Builder.Default
+    @Column(columnDefinition = "int (10) default '0'")
     @ColumnDefault(value = "0")
     private Integer updateCount = 0;
 }

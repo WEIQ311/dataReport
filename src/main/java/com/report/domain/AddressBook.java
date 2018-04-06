@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class AddressBook implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid")
-    private String boolId;
+    private String bookId;
 
     /**
      * 姓名
@@ -42,7 +43,7 @@ public class AddressBook implements Serializable {
     /**
      * 电话
      */
-    @Min(value = 7, message = "电话不能小于7位")
+    @Length(min = 7, message = "电话不能小于7位")
     private String tel;
 
     /**

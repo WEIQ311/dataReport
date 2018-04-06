@@ -7,6 +7,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -71,6 +72,8 @@ public class ReportAspect {
                     ((ResultEntity) object).setTotal(((ArrayList) ((ResultEntity) object).getData()).size());
                 } else if (null != ((ResultEntity) object).getData() && (((ResultEntity) object).getData() instanceof Map)) {
                     ((ResultEntity) object).setTotal(((Map) ((ResultEntity) object).getData()).size());
+                } else if (null != ((ResultEntity) object).getData() && (((ResultEntity) object).getData() instanceof Pageable)) {
+                    ((ResultEntity) object).setTotal(((Pageable) ((ResultEntity) object).getData()).getPageSize());
                 }
             }
             logger.debug("response:{}", object.toString());

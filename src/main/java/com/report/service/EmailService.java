@@ -4,6 +4,7 @@ package com.report.service;
 import com.report.domain.MailConfig;
 import com.report.vo.Pair;
 import com.report.vo.ResultEntity;
+import org.springframework.data.domain.Pageable;
 
 import java.io.File;
 import java.util.List;
@@ -53,4 +54,13 @@ public interface EmailService {
      * @return
      */
     ResultEntity sendTemplateMail(MailConfig mailConfig);
+
+    /**
+     * 通过mailConfig信息查询
+     *
+     * @param mailConfig
+     * @param pageable
+     * @return
+     */
+    ResultEntity findByMailConfig(MailConfig mailConfig, Pageable pageable);
 }
