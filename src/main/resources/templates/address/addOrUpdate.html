@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="fragments::bootStrap"></div>
+    <title>[[${title}]]</title>
+</head>
+<body>
+<div class="container" style="margin-top: 50px;">
+    <div th:if="${message} ne null">
+        <span th:text="${message}" class="text-danger"></span>
+        <a th:if="${status==500} " type="button" th:href="@{/addressBook}" class="btn btn-info">返回</a>
+    </div>
+    <form class="form-horizontal" th:if="${status==200}"
+          th:action="@{/addressBook/insertOrUpdate}" th:method="post">
+        <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">姓名:</label>
+            <div class="col-sm-10">
+                <input type="name" name="name" th:value="${bookDetail.name}" class="form-control" id="inputName"
+                       placeholder="请输入姓名">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">邮箱:</label>
+            <div class="col-sm-10">
+                <input type="email" name="mail" th:value="${bookDetail.mail}" class="form-control" id="inputEmail"
+                       placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTel" class="col-sm-2 control-label">电话:</label>
+            <div class="col-sm-10">
+                <input type="tel" name="tel" th:value="${bookDetail.tel}" class="form-control" id="inputTel"
+                       placeholder="请输入电话">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="selectSex" class="col-sm-2 control-label">性别:</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="sex" id="selectSex">
+                    <option th:selected="${bookDetail.sex=='女'}" value="女">女</option>
+                    <option th:selected="${bookDetail.sex=='男'}" value="男">男</option>
+                </select>
+            </div>
+            <label for="inputAge" class="col-sm-2 control-label">年龄:</label>
+            <div class="col-sm-4">
+                <input type="number" th:value="${bookDetail.age}" class="form-control" name="age" id="inputAge"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputWebChat" class="col-sm-2 control-label">微信号:</label>
+            <div class="col-sm-4">
+                <input type="text" name="webChat" th:value="${bookDetail.webChat}" class="form-control"
+                       id="inputWebChat"
+                       placeholder="请输入微信号">
+            </div>
+            <label for="inputQq" class="col-sm-2 control-label">QQ号:</label>
+            <div class="col-sm-4">
+                <input type="tel" name="qq" th:value="${bookDetail.qq}" class="form-control" id="inputQq"
+                       placeholder="请输入QQ号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress" class="col-sm-2 control-label">地址:</label>
+            <div class="col-sm-10">
+                <textarea th:text="${bookDetail.address}" name="address" rows="5" class="form-control"
+                          id="inputAddress"
+                          placeholder="请输入地址"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputRemark" class="col-sm-2 control-label">备注:</label>
+            <div class="col-sm-10">
+                <textarea th:text="${bookDetail.remark}" name="remark" rows="5" class="form-control"
+                          id="inputRemark"
+                          placeholder="请输入备注"/>
+            </div>
+        </div>
+        <input type="hidden" name="bookId" th:value="${bookDetail.bookId}">
+        <div class="form-group">
+            <div class="col-sm-offset-10 col-sm-2">
+                <button type="submit" class="btn btn-info">保存</button>
+                <a type="button" th:href="@{/addressBook}" class="btn btn-default">取消</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

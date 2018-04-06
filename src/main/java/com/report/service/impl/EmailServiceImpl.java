@@ -10,6 +10,8 @@ import com.report.vo.Pair;
 import com.report.vo.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -143,7 +145,6 @@ public class EmailServiceImpl implements EmailService {
                 mimeMessage.setRecipients(Message.RecipientType.BCC, internetAddressBcc);
             }
             helper.setFrom(emailConfig.getEmailFrom());
-//            helper.setTo(sendTo);
             helper.setSubject(mailConfig.getSubject());
             //TODO 将内容与模板替换为相应的html形式
             String text = String.join("\r\n", Files.readAllLines(Paths.get("E:\\IntelliJSpace\\jzpz\\src\\main\\resources\\resources\\index.html")));
@@ -157,5 +158,18 @@ public class EmailServiceImpl implements EmailService {
         javaMailSender.send(mimeMessage);
         mailConfigRepository.save(mailConfig);
         return ResultUtil.success(GlobalEnum.SEND_SUCCESS);
+    }
+
+    /**
+     * 通过mailConfig信息查询
+     *
+     * @param mailConfig
+     * @param pageable
+     * @return
+     */
+    @Override
+    public ResultEntity findByMailConfig(MailConfig mailConfig, Pageable pageable) {
+        Page<MailConfig> mailConfigs = mailConfigRepository.findAll(pageable);
+        return ResultUtil.success(GlobalEnum.QUERY_SUCCESS, mailConfigs);
     }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <head th:replace="fragments::head"/>
+    <link rel="stylesheet" th:href="@{/css/address.css}"/>
+    <title>通讯录</title>
+<body class="landing">
+<div id="page-wrapper">
+    <header th:replace="fragments::wrapper"/>
+    <section id="banner">
+        <form class="form-inline" th:action="@{/addressBook}">
+            <div class="form-group">
+                <label for="exampleInputName2">姓名</label>
+                <input type="text" name="name" th:value="${address.name}" class="form-control" id="exampleInputName2"
+                       placeholder="report">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">邮箱</label>
+                <input type="text" name="mail" th:value="${address.mail}" class="form-control" id="exampleInputEmail2"
+                       placeholder="report@report.com">
+            </div>
+            <button type="submit" class="btn btn-default btn-sm">查询</button>
+            <a type="button" class="btn btn-info" th:href="@{/addressBook/addOrUpdate}">增加</a>
+        </form>
+        <div class="inner">
+            <p th:if="${result.total}==0" style="color: white;">通讯录空空的!</p>
+        </div>
+        <div id="address_list">
+            <ul th:each="address : ${result.data}">
+                <a href="javascript:void(0);" th:href="@{/addressBook/addOrUpdate(bookId=${address.bookId})}"
+                   class="edit_book">编辑</a>
+                <li th:text="'姓名:'+${address.name}" th:title="'姓名:'+${address.name}"></li>
+                <li th:utext="'性别:'+${address.sex}+'&emsp;年龄:'+${address.age}"
+                    th:title="'性别:'+${address.sex}+'&emsp;年龄:'+${address.age}"></li>
+                <li th:text="'电话:'+${address.tel}" th:title="'电话:'+${address.mail}"></li>
+                <li th:text="'邮箱:'+${address.mail}" th:title="'邮箱:'+${address.mail}"></li>
+                <li th:text="'地址:'+${#strings.abbreviate(address.address,13)}"
+                    th:alt-title="'地址:'+${address.address}"></li>
+            </ul>
+        </div>
+    </section>
+</div>
+<div th:replace="fragments::foot"></div>
+<div th:replace="fragments::bootStrap"></div>
+</body>
+</html>

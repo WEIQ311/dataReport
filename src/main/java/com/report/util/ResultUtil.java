@@ -2,6 +2,7 @@ package com.report.util;
 
 import com.report.enums.GlobalEnum;
 import com.report.vo.ResultEntity;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -42,6 +43,17 @@ public class ResultUtil {
      */
     public static ResultEntity success(String message, Object data) {
         return ResultEntity.builder().success(true).message(message).data(data).build();
+    }
+
+    /**
+     * 分页返回
+     *
+     * @param querySuccess
+     * @param page
+     * @return
+     */
+    public static ResultEntity success(GlobalEnum querySuccess, Page page) {
+        return success(querySuccess, page.getContent(), page.getContent().size());
     }
 
     /**

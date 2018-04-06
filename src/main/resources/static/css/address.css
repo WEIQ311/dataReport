@@ -1,0 +1,29 @@
+#address_list {
+    margin: 0 auto;
+}
+
+#address_list ul {
+    width: 230px;
+    height: 112px;
+    list-style: none;
+    text-align: left;
+    float: left;
+    cursor: pointer;
+    border: 1px solid #bfbfbf;
+    margin: 5px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    padding: 5px;
+    color: #ffffff;
+}
+#address_list ul:hover{
+    background: #00c39c;
+}
+#address_list ul .edit_book{
+    position: relative;
+    right: 3px;
+    top: 0px;
+    float: right;
+    text-decoration: none;
+}
