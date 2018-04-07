@@ -28,9 +28,9 @@
         <div id="address_list">
             <ul th:each="address : ${result.data}">
                 <a href="javascript:void(0);" th:href="@{/addressBook/addOrUpdate(bookId=${address.bookId})}"
-                   class="edit_book">编辑</a>
+                   class="glyphicon glyphicon-edit edit_book">编辑</a>
                 <a href="javascript:void(0);" th:href="@{/addressBook/delete(bookId=${address.bookId})}"
-                   class="delete_book">删除</a>
+                   class="glyphicon glyphicon-remove delete_book">删除</a>
                 <li th:text="'姓名:'+${address.name}" th:title="'姓名:'+${address.name}"></li>
                 <li th:utext="'性别:'+${address.sex}+'&emsp;年龄:'+${address.age}"
                     th:title="'性别:'+${address.sex}+'&emsp;年龄:'+${address.age}"></li>

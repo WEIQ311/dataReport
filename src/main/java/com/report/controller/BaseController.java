@@ -26,4 +26,9 @@ public class BaseController {
      * 通讯录更新或新增页面
      */
     public static final String ADDRESS_ADD_UPDATE = "/address/addOrUpdate";
+
+    /**
+     * 邮件首页
+     */
+    public static final String EMAIL_ADD_OR_DETAIL = "/email/addOrDetail";
 }

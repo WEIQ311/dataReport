@@ -25,8 +25,11 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author weiQiang
@@ -149,13 +152,16 @@ public class EmailServiceImpl implements EmailService {
             //TODO 将内容与模板替换为相应的html形式
             String text = String.join("\r\n", Files.readAllLines(Paths.get("E:\\IntelliJSpace\\jzpz\\src\\main\\resources\\resources\\index.html")));
             helper.setText(mailConfig.getContent(), mailConfig.isContentHtml());
-            for (Pair<String, File> pair : mailConfig.getPairList()) {
-                helper.addAttachment(pair.getLeft(), new FileSystemResource(pair.getRight()));
+            if (null != mailConfig.getPairList() && mailConfig.getPairList().size() > 0) {
+                for (Pair<String, File> pair : mailConfig.getPairList()) {
+                    helper.addAttachment(pair.getLeft(), new FileSystemResource(pair.getRight()));
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         javaMailSender.send(mimeMessage);
+        mailConfig.setCreateTime(new Timestamp(System.currentTimeMillis()));
         mailConfigRepository.save(mailConfig);
         return ResultUtil.success(GlobalEnum.SEND_SUCCESS);
     }
@@ -169,7 +175,35 @@ public class EmailServiceImpl implements EmailService {
      */
     @Override
     public ResultEntity findByMailConfig(MailConfig mailConfig, Pageable pageable) {
-        Page<MailConfig> mailConfigs = mailConfigRepository.findAll(pageable);
+        String setTo = mailConfig.getSetTo();
+        String subject = mailConfig.getSubject();
+        if (!StringUtils.isEmpty(setTo)) {
+            setTo = "%".concat(setTo).concat("%");
+        } else {
+            setTo = "%%";
+        }
+        if (!StringUtils.isEmpty(subject)) {
+            subject = "%".concat(subject).concat("%");
+        } else {
+            subject = "%%";
+        }
+        Page<MailConfig> mailConfigs = mailConfigRepository.findBySetToIsLikeAndSubjectIsLikeOrderByCreateTimeDesc(setTo, subject, pageable);
         return ResultUtil.success(GlobalEnum.QUERY_SUCCESS, mailConfigs);
+    }
+
+    /**
+     * 查询邮件
+     *
+     * @param mailConfig
+     * @return
+     */
+    @Override
+    public List<MailConfig> queryMailConfig(MailConfig mailConfig) {
+        List<MailConfig> mailConfigs = new ArrayList<>();
+        Optional<MailConfig> mailConfigOptional = mailConfigRepository.findById(mailConfig.getMailId());
+        if (mailConfigOptional.isPresent()) {
+            mailConfigs.add(mailConfigOptional.get());
+        }
+        return mailConfigs;
     }
 }

@@ -5,12 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.File;
 import java.io.Serializable;
@@ -62,6 +60,7 @@ public class MailConfig implements Serializable {
      * 邮件内容
      */
     @NotBlank(message = "邮件内容不能为空!")
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     /**
@@ -110,5 +109,6 @@ public class MailConfig implements Serializable {
      * 发送时间
      */
     @Builder.Default
+    @ColumnDefault(value = "CURRENT_TIMESTAMP")
     private Timestamp createTime = new Timestamp(System.currentTimeMillis());
 }

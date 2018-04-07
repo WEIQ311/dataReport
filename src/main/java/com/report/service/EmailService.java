@@ -63,4 +63,12 @@ public interface EmailService {
      * @return
      */
     ResultEntity findByMailConfig(MailConfig mailConfig, Pageable pageable);
+
+    /**
+     * 查询邮件
+     *
+     * @param mailConfig
+     * @return
+     */
+    List<MailConfig> queryMailConfig(MailConfig mailConfig);
 }
