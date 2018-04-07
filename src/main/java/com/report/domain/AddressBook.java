@@ -8,12 +8,14 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -60,10 +62,16 @@ public class AddressBook implements Serializable {
     @ColumnDefault(value = "20")
     private Integer age = 20;
 
+    @Pattern(regexp = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$", message = "邮箱不能为空，且注意邮箱格式")
+    @NotBlank(message = "邮箱不能为空!")
     private String mail;
 
+    @Length(max = 4000,message = "地址不能多于4000个字符")
+    @Column(length = 4000)
     private String address;
 
+    @Length(max = 4000,message = "备注不能多于4000个字符")
+    @Column(length = 4000)
     private String remark;
 
     private String webChat;
