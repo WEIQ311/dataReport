@@ -66,11 +66,11 @@ public class AddressBook implements Serializable {
     @NotBlank(message = "邮箱不能为空!")
     private String mail;
 
-    @Length(max = 4000,message = "地址不能多于4000个字符")
+    @Length(max = 4000, message = "地址不能多于4000个字符")
     @Column(length = 4000)
     private String address;
 
-    @Length(max = 4000,message = "备注不能多于4000个字符")
+    @Length(max = 4000, message = "备注不能多于4000个字符")
     @Column(length = 4000)
     private String remark;
 
