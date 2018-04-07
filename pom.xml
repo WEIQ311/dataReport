@@ -28,8 +28,8 @@
         <druid.version>1.1.9</druid.version>
         <lombok.version>1.16.18</lombok.version>
         <fastjson.version>1.2.9</fastjson.version>
-        <bootstrap.version>3.3.6</bootstrap.version>
-        <jquery.version>3.0.0</jquery.version>
+        <bootstrap.version>3.3.7</bootstrap.version>
+        <jquery.version>3.3.1</jquery.version>
         <nekohtml.version>1.9.22</nekohtml.version>
     </properties>
     <dependencies>
