@@ -21,7 +21,6 @@ import java.sql.Timestamp;
  */
 @Data
 @Entity
-@Table(name = "report_template")
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
@@ -86,7 +85,6 @@ public class ReportTemplate implements Serializable {
      * 创建者
      * 同一报告只能由创建者更新
      */
-    @NotBlank(message = "用户ID不能为空!")
     @Column(length = 1000, columnDefinition = "VARCHAR (1000) COMMENT '用户ID'")
     private String userId;
     /**

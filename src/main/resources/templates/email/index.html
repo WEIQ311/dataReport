@@ -22,20 +22,22 @@
 <div id="page-wrapper">
     <header th:replace="fragments::wrapper"/>
     <div th:replace="fragments::bootStrap"></div>
-    <section id="banner">
-        <form class="form-inline" th:action="@{/email}">
-            <div class="form-group">
-                <label for="inputSubject">主题</label>
-                <input type="text" name="subject" th:value="${mailConfig.subject}" class="form-control"
-                       id="inputSubject" placeholder="Jane Doe">
+    <div class="container" id="detail-content">
+        <form class="form-inline center-block" th:action="@{/email}">
+            <div class="col-sm-offset-3">
+                <div class="form-group">
+                    <label for="inputSubject">主题</label>
+                    <input type="text" name="subject" th:value="${mailConfig.subject}" class="form-control"
+                           id="inputSubject" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">邮箱</label>
+                    <input type="text" name="setTo" th:value="${mailConfig.setTo}" class="form-control" id="inputEmail"
+                           placeholder="jane.doe@example.com">
+                </div>
+                <button type="submit" class="btn btn-default btn-sm">查询</button>
+                <a type="button" class="btn btn-info" th:href="@{/email/addEmail}">写邮件</a>
             </div>
-            <div class="form-group">
-                <label for="inputEmail">邮箱</label>
-                <input type="text" name="setTo" th:value="${mailConfig.setTo}" class="form-control" id="inputEmail"
-                       placeholder="jane.doe@example.com">
-            </div>
-            <button type="submit" class="btn btn-default btn-sm">查询</button>
-            <a type="button" class="btn btn-info" th:href="@{/email/addEmail}">写邮件</a>
         </form>
         <div class="table-responsive mail-table">
             <table class="table table-bordered table-hover table-condensed">
@@ -67,7 +69,7 @@
                 </tbody>
             </table>
         </div>
-    </section>
+    </div>
 </div>
 <div th:replace="fragments::foot"></div>
 </body>

@@ -2,73 +2,78 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="zh">
 <head>
     <meta charset="UTF-8">
+    <head th:replace="fragments::header"/>
     <div th:replace="fragments::bootStrap"></div>
     <title>[[${title}]]</title>
 </head>
-<body>
-<div class="container" style="margin-top: 50px;">
-    <span th:if="${message} ne null" th:text="${message}" class="text-danger text-center"></span>
-    <form class="form-horizontal" th:action="${showDetail}?'javascript:viod(0);':@{/email/send}" th:method="post">
-        <div class="form-group">
-            <label for="inputSetTo" class="col-sm-2 control-label">收件人</label>
-            <div class="col-sm-10">
-                <input type="text" name="setTo" th:disabled="${showDetail}" th:value="${mailConfig.setTo}"
-                       class="form-control" id="inputSetTo"
-                       placeholder="请输入或选择收件人">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputCcUsers" class="col-sm-2 control-label">抄送者</label>
-            <div class="col-sm-10">
-                <input type="text" name="ccUsers" th:disabled="${showDetail}" th:value="${mailConfig.ccUsers}"
-                       class="form-control"
-                       id="inputCcUsers" placeholder="请输入抄送者">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputBccUsers" class="col-sm-2 control-label">密送者</label>
-            <div class="col-sm-10">
-                <input type="text" name="bccUsers" th:disabled="${showDetail}" th:value="${mailConfig.bccUsers}"
-                       class="form-control"
-                       id="inputBccUsers" placeholder="请输入密送者">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputSubject" class="col-sm-2 control-label">主题</label>
-            <div class="col-sm-10">
-                <input type="text" name="subject" th:disabled="${showDetail}" th:value="${mailConfig.subject}" required
-                       class="form-control"
-                       id="inputSubject" placeholder="请输入主题">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-3">
-                <label>
-                    <input type="checkbox" th:disabled="${showDetail}" th:checked="${mailConfig.contentHtml}"
-                           name="contentHtml">邮件内容是否为HTML
-                </label>
-            </div>
-            <div class="col-sm-6">
-                <label class="col-sm-2 control-label" for="inputAttachments">附件</label>
+<body class="landing">
+<div id="page-wrapper">
+    <div id="detail-content" class="container" style="padding-top: 50px;">
+        <p th:if="${message} ne null" th:text="${message}" class="text-danger text-center"></p>
+        <form class="form-horizontal" th:action="${showDetail}?'javascript:viod(0);':@{/email/send}" th:method="post">
+            <div class="form-group">
+                <label for="inputSetTo" class="col-sm-2 control-label">收件人</label>
                 <div class="col-sm-10">
-                    <input type="file" th:disabled="${showDetail}" name="attachments" id="inputAttachments">
+                    <input type="text" name="setTo" th:disabled="${showDetail}" th:value="${mailConfig.setTo}"
+                           class="form-control" id="inputSetTo"
+                           placeholder="请输入或选择收件人">
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="inputContent" class="col-sm-2 control-label">内容</label>
-            <div class="col-sm-10">
+            <div class="form-group">
+                <label for="inputCcUsers" class="col-sm-2 control-label">抄送者</label>
+                <div class="col-sm-10">
+                    <input type="text" name="ccUsers" th:disabled="${showDetail}" th:value="${mailConfig.ccUsers}"
+                           class="form-control"
+                           id="inputCcUsers" placeholder="请输入抄送者">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputBccUsers" class="col-sm-2 control-label">密送者</label>
+                <div class="col-sm-10">
+                    <input type="text" name="bccUsers" th:disabled="${showDetail}" th:value="${mailConfig.bccUsers}"
+                           class="form-control"
+                           id="inputBccUsers" placeholder="请输入密送者">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSubject" class="col-sm-2 control-label">主题</label>
+                <div class="col-sm-10">
+                    <input type="text" name="subject" th:disabled="${showDetail}" th:value="${mailConfig.subject}"
+                           required
+                           class="form-control"
+                           id="inputSubject" placeholder="请输入主题">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-3">
+                    <label>
+                        <input type="checkbox" th:disabled="${showDetail}" th:checked="${mailConfig.contentHtml}"
+                               name="contentHtml">邮件内容是否为HTML
+                    </label>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-2 control-label" for="inputAttachments">附件</label>
+                    <div class="col-sm-10">
+                        <input type="file" th:disabled="${showDetail}" name="attachments" id="inputAttachments">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputContent" class="col-sm-2 control-label">内容</label>
+                <div class="col-sm-10">
             <textarea name="content" th:disabled="${showDetail}" required class="form-control"
                       th:utext="${mailConfig.content}" rows="5"
                       id="inputContent" placeholder="请输入内容"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group pull-right">
-            <button type="submit" th:if="${!showDetail}" class="btn btn-info">发送</button>
-            <a type="button" th:href="@{/email}" th:if="${showDetail}" class="btn btn-default">返回</a>
-            <a type="button" th:href="@{/email}" th:if="${!showDetail}" class="btn btn-default">取消</a>
-        </div>
-    </form>
+            <div class="form-group pull-right">
+                <button type="submit" th:if="${!showDetail}" class="btn btn-info">发送</button>
+                <a type="button" th:href="@{/email}" th:if="${showDetail}" class="btn btn-default">返回</a>
+                <a type="button" th:href="@{/email}" th:if="${!showDetail}" class="btn btn-default">取消</a>
+            </div>
+        </form>
+    </div>
 </div>
+<div th:replace="fragments::foot"></div>
 </body>
 </html>

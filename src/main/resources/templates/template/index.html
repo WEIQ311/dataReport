@@ -7,15 +7,27 @@
 <div id="page-wrapper">
     <header th:replace="fragments::wrapper"/>
     <div th:replace="fragments::bootStrap"></div>
-    <div  class="container" id="detail-content">
+    <div class="container" id="detail-content">
         <form class="form-inline" th:action="@{/reportTemplate}">
-            <div class="form-group">
-                <label for="inputTemplateName">模板名称</label>
-                <input type="text" name="templateName" th:value="${reportTemplate.templateName}" class="form-control"
-                       id="inputTemplateName" placeholder="Jane Doe">
+            <div class="col-sm-offset-3">
+                <div class="form-group">
+                    <label for="inputTemplateName">模板名称</label>
+                    <input type="text" name="templateName" th:value="${reportTemplate.templateName}"
+                           class="form-control"
+                           id="inputTemplateName" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="selectTemplateType">模板类型</label>
+                    <select name="templateType" class="form-control" id="selectTemplateType">
+                        <option th:selected="${reportTemplate.templateType==''}" value="">全部</option>
+                        <option th:selected="${reportTemplate.templateType=='html'}" value="html">html</option>
+                        <option th:selected="${reportTemplate.templateType=='doc'}" value="doc">doc</option>
+                        <option th:selected="${reportTemplate.templateType=='docx'}" value="docx">docx</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default btn-sm">查询</button>
+                <a type="button" class="btn btn-info" th:href="@{/reportTemplate/addOrDetail}">增加模板</a>
             </div>
-            <button type="submit" class="btn btn-default btn-sm">查询</button>
-            <a type="button" class="btn btn-info" th:href="@{/reportTemplate/addOrDetail}">增加模板</a>
         </form>
         <div class="table-responsive template-table">
             <table class="table table-bordered table-hover table-condensed">
@@ -40,12 +52,14 @@
                 <tbody>
                 <tr th:each="reportTemplate : ${result.data}" th:class="${reportTemplateStat.even}?'active':'info'">
                     <td th:text="${reportTemplateStat.index+1}">1</td>
-                    <td th:text="${#strings.abbreviate(reportTemplate.templateName,20)}" th:title="${reportTemplate.templateName}">模板名称</td>
+                    <td th:text="${#strings.abbreviate(reportTemplate.templateName,20)}"
+                        th:title="${reportTemplate.templateName}">模板名称
+                    </td>
                     <td th:text="${reportTemplate.templateType}" th:title="${reportTemplate.templateType}">模板类型</td>
                     <td th:text="${reportTemplate.templateModel}" th:title="${reportTemplate.templateModel}">模板形式</td>
                     <td th:text="${#dates.format(reportTemplate.createTime,'yyyy-MM-dd HH:mm:ss')}">创建时间</td>
                     <td><a href="javascript:void (0);" class="glyphicon glyphicon-list"
-                           th:href="@{/reportTemplate/detail(templateId=${reportTemplate.templateId})}">详情</a></td>
+                           th:href="@{/reportTemplate/addOrDetail(templateId=${reportTemplate.templateId})}">详情</a></td>
                 </tr>
                 </tbody>
             </table>

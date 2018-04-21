@@ -1,6 +1,7 @@
 package com.report.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.report.domain.ReportTemplate;
 import com.report.enums.GlobalEnum;
 import com.report.service.ReportTemplateService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -49,6 +52,7 @@ public class ReportTemplateController extends BaseController {
 
     /**
      * 添加或编辑页面
+     *
      * @param request
      * @param response
      * @param reportTemplate
@@ -68,7 +72,7 @@ public class ReportTemplateController extends BaseController {
                 request.setAttribute("title", "模板详情");
             } else {
                 reportTemplate = (ReportTemplate) resultEntity.getData();
-                request.setAttribute("title", reportTemplate.getTemplateName()+"模板详情");
+                request.setAttribute("title", reportTemplate.getTemplateName() + "模板详情");
             }
             request.setAttribute("insert", false);
         }
@@ -80,12 +84,31 @@ public class ReportTemplateController extends BaseController {
      * 增加
      *
      * @param reportTemplate
+     * @param bindingResult
      * @return
      */
     @RequestMapping(value = "insert", method = RequestMethod.POST)
-    @ResponseBody
-    public ResultEntity insert(ReportTemplate reportTemplate) {
-        return reportTemplateService.insert(reportTemplate);
+    public String insert(@Valid ReportTemplate reportTemplate, BindingResult bindingResult,HttpServletRequest request) {
+        request.setAttribute("insert", true);
+        if (bindingResult.hasErrors()) {
+            request.setAttribute("message", bindingResult.getFieldError().getDefaultMessage());
+            request.setAttribute("status", 200);
+            request.setAttribute("reportTemplate", reportTemplate);
+            request.setAttribute("showDetail", false);
+            request.setAttribute("title", "添加模板");
+            return TEMPLATE_ADD_OR_DETAIL;
+        }
+        ResultEntity resultEntity =  reportTemplateService.insert(reportTemplate);
+        if (resultEntity.isSuccess()){
+            return "redirect:".concat("reportTemplate");
+        }else{
+            request.setAttribute("message", resultEntity.getMessage());
+            request.setAttribute("status", 200);
+            request.setAttribute("reportTemplate", reportTemplate);
+            request.setAttribute("showDetail", false);
+            request.setAttribute("title", "添加模板");
+            return TEMPLATE_ADD_OR_DETAIL;
+        }
     }
 
     /**

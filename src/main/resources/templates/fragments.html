@@ -36,6 +36,7 @@
 <div th:fragment="bootStrap">
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/report.css}"/>
     <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
     <script>
         $(function () {
@@ -46,8 +47,11 @@
         });
         var content = (function () {
             var windowHeight = $(window).height();
-            $("#detail-content").css("height", (windowHeight - 100) + "px");
-            console.log(new Date().toLocaleString(),windowHeight)
+            var detailHeight = windowHeight-100;
+            if(windowHeight<400){
+                detailHeight = 400;
+            }
+            $("#detail-content").css("minHeight", detailHeight + "px");
         });
     </script>
 </div>
