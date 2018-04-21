@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author weiQiang
@@ -126,5 +127,22 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
         }
         Page<ReportTemplate> reportTemplates = reportTemplateRepository.findByTemplateNameLikeOrderByUpdateTimeDesc(templateName, pageable);
         return ResultUtil.success(GlobalEnum.QUERY_SUCCESS, reportTemplates);
+    }
+
+    /**
+     * 查询模板详情
+     *
+     * @param templateId
+     * @return
+     */
+    @Override
+    public ResultEntity findByTemplateId(String templateId) {
+        ResultEntity resultEntity = new ResultEntity();
+        Optional<ReportTemplate> optionalReportTemplate = reportTemplateRepository.findById(templateId);
+        if (optionalReportTemplate.isPresent()) {
+           resultEntity.setSuccess(true);
+           resultEntity.setData(optionalReportTemplate.get());
+        }
+        return resultEntity;
     }
 }

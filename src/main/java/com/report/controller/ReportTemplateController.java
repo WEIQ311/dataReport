@@ -43,7 +43,37 @@ public class ReportTemplateController extends BaseController {
     public String index(HttpServletRequest request, HttpServletResponse response, ReportTemplate reportTemplate) {
         ResultEntity resultEntity = reportTemplateService.findByReportTemplate(reportTemplate, Pageable.unpaged());
         request.setAttribute("result", resultEntity);
-        return REPORT_INDEX;
+        request.setAttribute("reportTemplate", reportTemplate);
+        return TEMPLATE_INDEX;
+    }
+
+    /**
+     * 添加或编辑页面
+     * @param request
+     * @param response
+     * @param reportTemplate
+     * @return
+     */
+    @RequestMapping(value = "addOrDetail")
+    public String addOrDetail(HttpServletRequest request, HttpServletResponse response, ReportTemplate reportTemplate) {
+        ResultEntity resultEntity = new ResultEntity();
+        request.setAttribute("status", 200);
+        request.setAttribute("title", "添加模板");
+        request.setAttribute("insert", true);
+        if (!StringUtils.isEmpty(reportTemplate.getTemplateId())) {
+            resultEntity = reportTemplateService.findByTemplateId(reportTemplate.getTemplateId());
+            if (!resultEntity.isSuccess()) {
+                request.setAttribute("status", 404);
+                request.setAttribute("message", "未查询到相应详情!");
+                request.setAttribute("title", "模板详情");
+            } else {
+                reportTemplate = (ReportTemplate) resultEntity.getData();
+                request.setAttribute("title", reportTemplate.getTemplateName()+"模板详情");
+            }
+            request.setAttribute("insert", false);
+        }
+        request.setAttribute("reportTemplate", reportTemplate);
+        return TEMPLATE_ADD_OR_DETAIL;
     }
 
     /**

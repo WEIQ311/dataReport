@@ -21,7 +21,7 @@
                 <div id="menu">
                     <ul>
                         <li><a th:href="@{/}">主页</a></li>
-                        <li><a th:href="@{/reportTemplate/}">报告设置</a></li>
+                        <li><a th:href="@{/reportTemplate/}">模板详情</a></li>
                         <li><a th:href="@{/templateConfig/}">模板设置</a></li>
                         <li><a th:href="@{/email/}">邮件中心</a></li>
                         <li><a th:href="@{/addressBook/}">通讯录</a></li>
@@ -37,6 +37,19 @@
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script>
+        $(function () {
+            $(window).resize(function () {
+                content();
+            });
+            content();
+        });
+        var content = (function () {
+            var windowHeight = $(window).height();
+            $("#detail-content").css("height", (windowHeight - 100) + "px");
+            console.log(new Date().toLocaleString(),windowHeight)
+        });
+    </script>
 </div>
 <div th:fragment="foot">
     <footer id="footer">

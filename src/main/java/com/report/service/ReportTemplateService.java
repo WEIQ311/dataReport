@@ -59,4 +59,12 @@ public interface ReportTemplateService {
      * @return
      */
     ResultEntity findByReportTemplate(ReportTemplate reportTemplate, Pageable pageable);
+
+    /**
+     * 查询模板详情
+     *
+     * @param templateId
+     * @return
+     */
+    ResultEntity findByTemplateId(String templateId);
 }

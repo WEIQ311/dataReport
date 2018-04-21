@@ -4,9 +4,9 @@ spring:
     # 设置邮箱主机
     host: smtp.qq.com
     # 用户名
-    username: *****************@qq.com
+    username: 1107438082@qq.com
     # 密码
-    password: ******************
+    password: mdbnixrxthqrgeea
     #  邮件服务器名称,例如:POP3、SMTP、IMAP每个服务器对应端口不一样
     protocol: smtp
     # 端口

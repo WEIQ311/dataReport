@@ -26,6 +26,6 @@ public class TemplateConfigController extends BaseController {
      */
     @RequestMapping(value = {"", "/", "/index", "/list"}, method = RequestMethod.GET)
     public String index(HttpServletRequest request, HttpServletResponse response, TemplateConfig templateConfig) {
-        return TEMPLATE_INDEX;
+        return TEMPLATE_DETAIL;
     }
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <head th:replace="fragments::header"/>
+    <div th:replace="fragments::bootStrap"></div>
+    <title>[[${title}]]</title>
+</head>
+<body class="landing">
+<div class="container" id="page-wrapper" style="margin-top: 50px;">
+    <span th:if="${message} ne null" th:text="${message}" class="text-danger text-center"></span>
+    <form class="form-horizontal" th:action="${insert}?@{/reportTemplate/insert}:@{/reportTemplate/update}"
+          th:method="post">
+        <div class="form-group">
+            <input type="hidden" name="templateId" th:value="${reportTemplate.templateId}">
+            <label for="inputTemplateName" class="col-sm-2 control-label">模板名称</label>
+            <div class="col-sm-10">
+                <input type="text" name="templateName" th:value="${reportTemplate.templateName}"
+                       class="form-control" id="inputTemplateName" placeholder="请输入模板名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTemplateType" class="col-sm-2 control-label">模板类型</label>
+            <div class="col-sm-10">
+                <input type="text" name="templateType" th:value="${reportTemplate.templateType}"
+                       class="form-control" id="inputTemplateType" placeholder="请输入模板类型">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTemplateModel" class="col-sm-2 control-label">模板形式</label>
+            <div class="col-sm-10">
+                <input type="text" name="templateModel" th:value="${reportTemplate.templateModel}"
+                       class="form-control" id="inputTemplateModel" placeholder="请选择模板形式">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTemplatePath" class="col-sm-2 control-label">模板路径</label>
+            <div class="col-sm-10">
+                <input type="text" name="subject" th:value="${reportTemplate.templatePath}"
+                       class="form-control" id="inputTemplatePath" placeholder="请输入模板路径">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputRemark" class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-10">
+            <textarea name="content" class="form-control"
+                      th:utext="${reportTemplate.remark}" rows="5"
+                      id="inputRemark" placeholder="请输入备注"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTemplateContent" class="col-sm-2 control-label">模板内容</label>
+            <div class="col-sm-10">
+            <textarea name="content" class="form-control"
+                      th:utext="${reportTemplate.templateContent}" rows="5"
+                      id="inputTemplateContent" placeholder="请输入备注"></textarea>
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <button type="submit" class="btn btn-info" th:text="${insert}?'添加':'更新'">发送</button>
+            <a type="button" th:href="@{/reportTemplate}" th:if="${!insert}" class="btn btn-default">返回</a>
+            <a type="button" th:href="@{/reportTemplate}" th:if="${insert}" class="btn btn-default">取消</a>
+        </div>
+    </form>
+</div>
+<div th:replace="fragments::foot"></div>
+</body>
+</html>
