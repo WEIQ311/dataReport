@@ -19,6 +19,14 @@ public class BaseController {
      */
     public static final String TEMPLATE_INDEX = "/template/index";
     /**
+     * 增加或详情
+     */
+    public static final String TEMPLATE_ADD_OR_DETAIL = "/template/addOrDetail";
+    /**
+     * 模板详情
+     */
+    public static final String TEMPLATE_DETAIL = "/tempDetail/index";
+    /**
      * 通讯录首页
      */
     public static final String ADDRESS_INDEX = "/address/index";
