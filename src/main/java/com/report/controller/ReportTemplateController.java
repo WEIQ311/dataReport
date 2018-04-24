@@ -76,7 +76,7 @@ public class ReportTemplateController extends BaseController {
             }
             request.setAttribute("insert", false);
         }
-        request.setAttribute("reportTemplate", reportTemplate);
+        request.setAttribute("template", reportTemplate);
         return TEMPLATE_ADD_OR_DETAIL;
     }
 
@@ -93,18 +93,18 @@ public class ReportTemplateController extends BaseController {
         if (bindingResult.hasErrors()) {
             request.setAttribute("message", bindingResult.getFieldError().getDefaultMessage());
             request.setAttribute("status", 200);
-            request.setAttribute("reportTemplate", reportTemplate);
+            request.setAttribute("template", reportTemplate);
             request.setAttribute("showDetail", false);
             request.setAttribute("title", "添加模板");
             return TEMPLATE_ADD_OR_DETAIL;
         }
         ResultEntity resultEntity =  reportTemplateService.insert(reportTemplate);
         if (resultEntity.isSuccess()){
-            return "redirect:".concat("reportTemplate");
+            return "redirect:../".concat("reportTemplate");
         }else{
             request.setAttribute("message", resultEntity.getMessage());
             request.setAttribute("status", 200);
-            request.setAttribute("reportTemplate", reportTemplate);
+            request.setAttribute("template", reportTemplate);
             request.setAttribute("showDetail", false);
             request.setAttribute("title", "添加模板");
             return TEMPLATE_ADD_OR_DETAIL;
@@ -142,12 +142,16 @@ public class ReportTemplateController extends BaseController {
      * @return
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    @ResponseBody
-    public ResultEntity update(ReportTemplate reportTemplate) {
+    public String update(ReportTemplate reportTemplate,HttpServletRequest request) {
         if (StringUtils.isEmpty(reportTemplate.getTemplateId())) {
-            return ResultUtil.error(GlobalEnum.ID_ERROR);
+            request.setAttribute("message",GlobalEnum.ID_ERROR.toString());
+            request.setAttribute("template", reportTemplate);
+            return "redirect:".concat(TEMPLATE_ADD_OR_DETAIL).concat("?templateId=").concat(reportTemplate.getTemplateId());
         }
-        return reportTemplateService.update(reportTemplate);
+        ResultEntity resultEntity = reportTemplateService.update(reportTemplate);
+        request.setAttribute("template", resultEntity.getData());
+        request.setAttribute("message",resultEntity.getMessage());
+        return "redirect:../".concat("reportTemplate");
     }
 
     /**

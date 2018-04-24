@@ -85,8 +85,16 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
         if (StringUtils.isEmpty(reportTemplate.getTemplateId())) {
             new RuntimeException(GlobalEnum.ID_ERROR.toString());
         }
+        ReportTemplate oldTemplate = null;
+        Optional<ReportTemplate> template = reportTemplateRepository.findById(reportTemplate.getTemplateId());
+        if (template.isPresent()) {
+            oldTemplate = template.get();
+        } else {
+            return ResultUtil.error(GlobalEnum.QUERY_ERROR);
+        }
         reportTemplate.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-        reportTemplate.setUpdateCount(Integer.sum(reportTemplate.getUpdateCount(), 1));
+        reportTemplate.setCreateTime(null == oldTemplate.getCreateTime() ? new Timestamp(System.currentTimeMillis()) : oldTemplate.getCreateTime());
+        reportTemplate.setUpdateCount(Integer.sum(null == oldTemplate.getUpdateCount() ? 0 : oldTemplate.getUpdateCount(), 1));
         reportTemplate = reportTemplateRepository.save(reportTemplate);
         return ResultUtil.success(GlobalEnum.UPDATE_SUCCESS, reportTemplate);
     }
@@ -140,8 +148,8 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
         ResultEntity resultEntity = new ResultEntity();
         Optional<ReportTemplate> optionalReportTemplate = reportTemplateRepository.findById(templateId);
         if (optionalReportTemplate.isPresent()) {
-           resultEntity.setSuccess(true);
-           resultEntity.setData(optionalReportTemplate.get());
+            resultEntity.setSuccess(true);
+            resultEntity.setData(optionalReportTemplate.get());
         }
         return resultEntity;
     }
