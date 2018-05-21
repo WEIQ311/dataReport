@@ -78,7 +78,7 @@ public class SmsServiceImpl implements SmsService {
         request.setPhoneNumbers(telephone);
         request.setTemplateParam(templateParam);
         request.setTemplateCode(templateCode);
-        request.setSignName("志鸿思荣");
+        request.setSignName(smsSignName);
 
         boolean success = false;
         try {
