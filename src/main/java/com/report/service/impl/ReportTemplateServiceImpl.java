@@ -20,7 +20,7 @@ import java.util.Optional;
 /**
  * @author weiQiang
  */
-@Service(value = "ReportTemplateService")
+@Service(value = "reportTemplateService")
 public class ReportTemplateServiceImpl implements ReportTemplateService {
 
     @Autowired

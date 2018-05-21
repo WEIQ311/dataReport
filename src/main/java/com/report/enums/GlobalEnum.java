@@ -20,8 +20,6 @@ public enum GlobalEnum {
     UPDATE_ERROR("更新失败!"),
     SEND_SUCCESS("发送成功!"),
     SEND_ERROR("发送成功!"),
-    BAD_TEL("请输入正确的手机号!"),
-    SERVER_USED("服务忙，请稍后重试!"),
     ID_ERROR("ID为空!");
     private String message;
 
