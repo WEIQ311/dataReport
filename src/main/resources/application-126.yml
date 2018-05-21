@@ -4,9 +4,9 @@ spring:
     # 设置邮箱主机
     host: smtp.126.com
     # 用户名
-    username: ****************@126.com
+    username: weiqiang_6@126.com
     # 密码
-    password: *********************
+    password: XYLWQHAN311525
     #  邮件服务器名称,例如:POP3、SMTP、IMAP每个服务器对应端口不一样
     protocol: smtp
     # 端口
@@ -19,3 +19,14 @@ spring:
           auth: true
           # 超时时间
           timeout: 25000
+
+
+# 阿里云短信配置 注意替换自己申请的配置
+aliyun:
+  sms:
+    accessKey: LTAI3LujUtvtrExX
+    accessKeySecret: aYz8a9dXoCMeK6OFejqGsGH164783x
+    sign:
+      name: 大数据报告
+    template:
+      code: SMS_134195068

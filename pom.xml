@@ -31,6 +31,9 @@
         <bootstrap.version>3.3.7</bootstrap.version>
         <jquery.version>3.3.1</jquery.version>
         <nekohtml.version>1.9.22</nekohtml.version>
+        <ant.version>1.6.5</ant.version>
+        <aliyun.sdk.core.version>3.2.3</aliyun.sdk.core.version>
+        <aliyun.sdk.dysmsapi.version>1.0.0</aliyun.sdk.dysmsapi.version>
     </properties>
     <dependencies>
         <dependency>
@@ -92,6 +95,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+        <!--security-->
+       <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>-->
         <!--mail-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -157,6 +165,27 @@
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
             <version>${nekohtml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>${ant.version}</version>
+        </dependency>
+        <!--aliyun-sdk-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>${aliyun.sdk.core.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/aliyun-java-sdk-core-3.2.3.jar</systemPath>
+        </dependency>
+        <!--aliyun-dysmsapi-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+            <version>${aliyun.sdk.dysmsapi.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>
         </dependency>
     </dependencies>
     <build>

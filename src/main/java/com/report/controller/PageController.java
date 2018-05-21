@@ -16,4 +16,9 @@ public class PageController {
     public String index(HttpServletRequest request, HttpServletResponse response) {
         return "index";
     }
+
+    @RequestMapping(value = "login")
+    public String loginPage(){
+        return "login";
+    }
 }
