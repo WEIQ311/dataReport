@@ -35,6 +35,11 @@ public class GloabalUtils {
     public static final String XML_HTTP_REQUEST = "XMLHttpRequest";
 
     /**
+     * ok
+     */
+    public static final String OK = "OK";
+
+    /**
      * 获取IP地址
      *
      * @param request
