@@ -24,14 +24,14 @@
         <maven.compiler.version>3.7.0</maven.compiler.version>
         <java.version>1.8</java.version>
         <aspose.version>16.4.0</aspose.version>
-        <commons.version>2.6</commons.version>
-        <druid.version>1.1.9</druid.version>
-        <lombok.version>1.16.18</lombok.version>
-        <fastjson.version>1.2.9</fastjson.version>
-        <bootstrap.version>3.3.7</bootstrap.version>
-        <jquery.version>3.3.1</jquery.version>
-        <nekohtml.version>1.9.22</nekohtml.version>
-        <ant.version>1.6.5</ant.version>
+        <commons.version>[2.6,)</commons.version>
+        <druid.version>[1.1.9,)</druid.version>
+        <lombok.version>[1.16.18,)</lombok.version>
+        <fastjson.version>[1.2.9,)</fastjson.version>
+        <bootstrap.version>[3.3.7,)</bootstrap.version>
+        <jquery.version>[3.3.1,)</jquery.version>
+        <nekohtml.version>[1.9.22,)</nekohtml.version>
+        <ant.version>[1.6.5,)</ant.version>
         <aliyun.sdk.core.version>3.2.3</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.0.0</aliyun.sdk.dysmsapi.version>
     </properties>

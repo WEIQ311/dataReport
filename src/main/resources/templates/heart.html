@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>♥</title>
+    <style>
+        body {
+            width: 90%;
+            height: 100%;
+            background-image: radial-gradient(pink, pink);
+        }
+
+        .styleEditor {
+            padding: .5em;
+            margin: 2.5vh 5vw;
+        }
+
+        .heart {
+            position: absolute;
+            top: 40vh;
+            left: 49vw;
+            width: 60px;
+            height: 60px;
+            background-color: tomato;
+            animation: beat .9s infinite ease-in;
+        }
+
+        .heart:before, .heart:after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: tomato;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            left: 30px;
+        }
+
+        .heart:after {
+            top: -30px;
+        }
+
+        /*特效*/
+        @keyframes beat {
+            0% {
+                transform: scale(1) rotate(-45deg);
+            }
+            40% {
+                transform: scale(1) rotate(-45deg);
+            }
+            55% {
+                transform: scale(1.3) rotate(-30deg);
+            }
+            70% {
+                transform: scale(1) rotate(-45deg);
+            }
+            85% {
+                transform: scale(1.3) rotate(-60deg);
+            }
+            100% {
+                transform: scale(1) rotate(-45deg);
+            }
+
+        }
+    </style>
+</head>
+<body>
+<div class="styleEditor">
+    <div class="heart"></div>
+</div>
+</body>
+</html>
