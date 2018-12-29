@@ -217,8 +217,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-src/main/resources/application-126.yml
+src/main/resources/config/application-126.yml
 src/main/resources/application-es.yml
 doc/
 src/test/java/com/report/GoUpstairs.java
 src/test/java/com/report/TestMinStack.java
+src/main/resources/config/application-126.yml

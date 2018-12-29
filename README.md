@@ -28,7 +28,7 @@
 	1. 导出报告支持多种格式(word、pdf、html、excel、zip)
 	2. 在线转换格式,word <-> html <->pdf,word <-> pdf
 6. 技术支持
-	1. Spring-boot :2.0.0.RELEASE
+	1. Spring-boot :2.1.1.RELEASE
 	2. thymeleaf
 	3. mysql
 	4. spring-data-jpa

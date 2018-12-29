@@ -18,7 +18,7 @@ spring:
      date-format: yyyy-MM-dd HH:mm:ss
   profiles:
       active: prod
-      include: 126,druid
+      include: 126
   thymeleaf:
     cache: false
     encoding: UTF-8
