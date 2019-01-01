@@ -20,9 +20,11 @@ spring:
       active: prod
       include: 126
   thymeleaf:
+    # 清除缓存，实现热部署。也就是修改了html后不用重启，刷新页面就能看到效果
     cache: false
     encoding: UTF-8
-    mode: HTML5
+    # 回避HTML进行严格的检查的配置
+    mode: LEGACYHTML5
     prefix: classpath:/templates/
     suffix: .html
     servlet:

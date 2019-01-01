@@ -29,7 +29,7 @@
         <lombok.version>[1.16.18,)</lombok.version>
         <fastjson.version>[1.2.9,)</fastjson.version>
         <bootstrap.version>3.3.7</bootstrap.version>
-        <jquery.version>[3.3.1,)</jquery.version>
+        <jquery.version>3.3.1</jquery.version>
         <nekohtml.version>[1.9.22,)</nekohtml.version>
         <ant.version>[1.6.5,)</ant.version>
         <aliyun.sdk.core.version>3.2.3</aliyun.sdk.core.version>

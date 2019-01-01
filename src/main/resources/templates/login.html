@@ -9,9 +9,8 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}">
     <link th:href="@{/css/common.css}" rel='stylesheet' type='text/css'/>
     <link th:href="@{/css/main-login.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/lib/layui/layui.css}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/user/login.css}">
-    <script th:src="@{/lib/layer/2.4/layer.js}"></script>
+    <link th:href="@{/css/user/login.css}" rel="stylesheet" type="text/css">
+    <div th:replace="fragments::layui"></div>
     <script th:src="@{/js/common.js}"></script>
 </head>
 <body>
@@ -35,12 +34,11 @@
                                 <i class="fa fa-user"></i>
                             </div>
                             <div class="form-group help">
-                                <input name="smsCode" type="text" class="form-control password" id="validateCode"
+                                <input name="smsCode" type="number" class="form-control password" id="validateCode"
                                        placeholder="6位验证码">
                                 <i class="fa fa-lock"></i>
                                 <!--<a href="#" class="fa fa-question-circle"></a>-->
-                                <button id="smsCodeBtn" type="button" class="valide-code btn btn-default">获取验证码
-                                </button>
+                                <button id="smsCodeBtn" type="button" class="valide-code btn btn-default">获取验证码</button>
 
                             </div>
                         </div>
@@ -169,7 +167,7 @@
                     if (data.code === 200) {
                         var smsBtn = $('#smsCodeBtn');
                         smsBtn.attr('disabled', 'disabled');
-                        smsBtn.css("background-color", "#b4b2b3");
+                        smsBtn.css('background-color', '#b4b2b3');
 
                         var time = 60;
                         var clock = setInterval(function () {
