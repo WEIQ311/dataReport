@@ -1,12 +1,11 @@
 package com.report.aspect;
 
-
 import com.report.util.GloabalUtils;
 import com.report.vo.ResultEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.core.NamedThreadLocal;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -21,20 +20,56 @@ import java.util.Map;
  *
  * @author weiQiang
  */
+@Slf4j
 @Aspect
 @Component
 public class ReportAspect {
 
-    private final static Logger logger = LoggerFactory.getLogger(ReportAspect.class);
-
     /**
      * 开始时间,用于记录请求耗时
      */
-    private static long BEGIN_TIME = System.currentTimeMillis();
+    private NamedThreadLocal<Long> namedThreadLocal = new NamedThreadLocal<>("threadLocalTime");
+    private NamedThreadLocal<String> urlThreadLocal = new NamedThreadLocal<>("urlThreadLocalTime");
 
     @Pointcut(value = "execution(* com.report.controller.*.*(..))")
     public void doController() {
     }
+
+
+    /**
+     * 请求之后拦截
+     */
+    @After("doController()")
+    public void doAfter() {
+
+    }
+
+
+    /**
+     * 返回时拦截
+     *
+     * @param object
+     */
+    @AfterReturning(returning = "object", pointcut = "doController()")
+    public void doAfterReturning(Object object) {
+        long totalTime = System.currentTimeMillis() - namedThreadLocal.get();
+        if (null != object) {
+            if (object instanceof ResultEntity) {
+                ((ResultEntity) object).setTotalTime(totalTime);
+                if (null != ((ResultEntity) object).getData() && (((ResultEntity) object).getData() instanceof ArrayList)) {
+                    ((ResultEntity) object).setTotal(((ArrayList) ((ResultEntity) object).getData()).size());
+                } else if (null != ((ResultEntity) object).getData() && (((ResultEntity) object).getData() instanceof Map)) {
+                    ((ResultEntity) object).setTotal(((Map) ((ResultEntity) object).getData()).size());
+                } else if (null != ((ResultEntity) object).getData() && (((ResultEntity) object).getData() instanceof Pageable)) {
+                    ((ResultEntity) object).setTotal(((Pageable) ((ResultEntity) object).getData()).getPageSize());
+                }
+            }
+        } else {
+            log.debug("response:{}", "无返回值");
+        }
+        log.info("请求:{} 返回,耗时:{}ms", urlThreadLocal.get(), totalTime);
+    }
+
 
     /**
      * 请求之前拦截
@@ -45,41 +80,11 @@ public class ReportAspect {
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        BEGIN_TIME = System.currentTimeMillis();
-        logger.info("url:{},方法:{},请求ip:{},类和方法:{}(),参数:{}", request.getRequestURL(), request.getMethod(), GloabalUtils.getIpAddress(request), joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName(), joinPoint.getArgs());
-
+        namedThreadLocal.set(System.currentTimeMillis());
+        urlThreadLocal.set(request.getRequestURL().toString());
+        log.info("url:{},方法:{},请求ip:{},类和方法:{}()", request.getRequestURL(), request.getMethod(), GloabalUtils.getIpAddress(request), joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        log.debug("参数:{}", joinPoint.getArgs());
     }
 
-    /**
-     * 请求之后拦截
-     */
-    @After("doController()")
-    public void doAfter() {
 
-    }
-
-    /**
-     * 返回时拦截
-     *
-     * @param object
-     */
-    @AfterReturning(returning = "object", pointcut = "doController()")
-    public void doAfterReturning(Object object) {
-        if (null != object) {
-            if (object instanceof ResultEntity) {
-                ((ResultEntity) object).setTotalTime((System.currentTimeMillis() - BEGIN_TIME));
-                if (null != ((ResultEntity) object).getData() && (((ResultEntity) object).getData() instanceof ArrayList)) {
-                    ((ResultEntity) object).setTotal(((ArrayList) ((ResultEntity) object).getData()).size());
-                } else if (null != ((ResultEntity) object).getData() && (((ResultEntity) object).getData() instanceof Map)) {
-                    ((ResultEntity) object).setTotal(((Map) ((ResultEntity) object).getData()).size());
-                } else if (null != ((ResultEntity) object).getData() && (((ResultEntity) object).getData() instanceof Pageable)) {
-                    ((ResultEntity) object).setTotal(((Pageable) ((ResultEntity) object).getData()).getPageSize());
-                }
-            }
-            logger.debug("response:{}", object.toString());
-        } else {
-            logger.debug("response:{}", "无返回值");
-        }
-
-    }
 }
