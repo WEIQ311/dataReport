@@ -34,6 +34,7 @@
         <ant.version>[1.6.5,)</ant.version>
         <aliyun.sdk.core.version>3.2.3</aliyun.sdk.core.version>
         <aliyun.sdk.dysmsapi.version>1.0.0</aliyun.sdk.dysmsapi.version>
+        <nacos.version>0.2.1</nacos.version>
     </properties>
     <dependencies>
         <dependency>
@@ -187,6 +188,17 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>
         </dependency>
+        <!--nacos-->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <version>${nacos.version}</version>
+        </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-context</artifactId>
+        <version>2.1.0.RC2</version>
+      </dependency>
     </dependencies>
     <build>
         <plugins>
