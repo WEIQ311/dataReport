@@ -7,13 +7,15 @@ import com.report.util.ResultUtil;
 import com.report.vo.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author weiQiang
  * @date 2018/5/21
  */
-@RestController(value = "sms")
+@RestController
+@RequestMapping(value = "sms")
 public class SmsController {
 
     @Autowired
@@ -26,7 +28,7 @@ public class SmsController {
      * @return ResultEntity
      */
     @GetMapping(value = "code")
-    private ResultEntity smsCode(String telephone) {
+    public ResultEntity smsCode(String telephone) {
         if (!LoginUserUtil.checkTelephone(telephone)) {
             return ResultUtil.error(GlobalEnum.BAD_TEL);
         }

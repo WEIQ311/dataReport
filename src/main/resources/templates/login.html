@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>登陆</title>
-    <head th:include="fragments::head"/>
+    <head th:include="fragments::head"></head>
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}">
@@ -12,6 +12,7 @@
     <link th:href="@{/css/user/login.css}" rel="stylesheet" type="text/css">
     <div th:replace="fragments::layui"></div>
     <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/lib/layer/2.4/layer.js}"></script>
 </head>
 <body>
 <div class="containers">
@@ -151,7 +152,7 @@
 
         $('#smsCodeBtn').on('click', function () {
             var telephone = $('.login-form form').find('input[name="telephone"]').val(),
-                phonePattern = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
+                phonePattern = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9])|(1[1-9][0-9]))\d{8}$/;
             var n = telephone.search(phonePattern);
             if (n < 0) {
                 layer.msg('请输入正确的手机号', {icon: 5, time: 2000});

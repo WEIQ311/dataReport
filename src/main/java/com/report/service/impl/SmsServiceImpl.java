@@ -32,13 +32,13 @@ import java.util.UUID;
 @Slf4j
 public class SmsServiceImpl implements SmsService {
 
-    @Value("${aliyun.sms.accessKey}")
+    @Value("${aliyun.sms.accessKey:}")
     private String accessKey;
-    @Value("${aliyun.sms.accessKeySecret}")
+    @Value("${aliyun.sms.accessKeySecret:}")
     private String secertKey;
-    @Value("${aliyun.sms.template.code}")
+    @Value("${aliyun.sms.template.code:}")
     private String templateCode;
-    @Value("${aliyun.sms.sign.name}")
+    @Value("${aliyun.sms.sign.name:}")
     private String smsSignName;
     @Autowired
     private IAcsClient acsClient;
@@ -68,7 +68,7 @@ public class SmsServiceImpl implements SmsService {
         SendSmsRequest request = new SendSmsRequest();
 
         // 使用post提交
-        request.setMethod(MethodType.POST);
+        request.setSysMethod(MethodType.POST);
         request.setPhoneNumbers(telephone);
         request.setTemplateParam(templateParam);
         request.setTemplateCode(templateCode);

@@ -5,7 +5,6 @@
 *.pydevproject
 .project
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
@@ -224,3 +223,5 @@ doc/
 src/test/java/com/report/GoUpstairs.java
 src/test/java/com/report/TestMinStack.java
 src/main/resources/config/application-126.yml
+!/src/main/assembly/bin/
+!/src/main/assembly/bin/start.bat

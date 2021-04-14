@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DataReportonfig {
 
-    @Value("${aliyun.sms.accessKey}")
+    @Value("${aliyun.sms.accessKey:''}")
     private String accessKey;
 
-    @Value("${aliyun.sms.accessKeySecret}")
+    @Value("${aliyun.sms.accessKeySecret:''}")
     private String secertKey;
 
     @Bean(name = "IAcsClient")

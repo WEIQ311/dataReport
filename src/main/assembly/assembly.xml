@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<assembly>
+  <id>package</id>
+  <formats>
+    <format>zip</format><!--打包的文件格式,也可以有：war zip-->
+  </formats>
+  <!--zip压缩包下是否生成和项目名相同的根目录-->
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <fileSets>
+    <fileSet>
+      <directory>src/main/assembly/bin</directory>
+      <outputDirectory>./</outputDirectory>
+      <excludes>
+        <exclude>docker-*.sh</exclude>
+      </excludes>
+    </fileSet>
+    <fileSet>
+      <directory>src/main/resources/config</directory>
+      <outputDirectory>./config</outputDirectory>
+    </fileSet>
+    <fileSet>
+      <directory>src/main/resources/db</directory>
+      <outputDirectory>./db</outputDirectory>
+      <!--sql打包到zip包时可以将以下注释掉-->
+      <excludes>
+        <exclude>*.sql</exclude>
+      </excludes>
+    </fileSet>
+    <fileSet>
+      <directory>${project.build.directory}</directory>
+      <outputDirectory>./</outputDirectory>
+      <includes>
+        <include>*.jar</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  <dependencySets>
+    <dependencySet>
+      <!--是否把本项目添加到依赖文件夹下-->
+      <!--<useProjectArtifact>true</useProjectArtifact>-->
+      <outputDirectory>lib</outputDirectory>
+      <!--将scope为runtime的依赖包打包-->
+      <scope>runtime</scope>
+      <excludes>
+        <exclude>${groupId}:${artifactId}</exclude>
+      </excludes>
+    </dependencySet>
+  </dependencySets>
+</assembly>
+

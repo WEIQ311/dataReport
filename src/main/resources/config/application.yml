@@ -15,7 +15,8 @@ spring:
 
   mvc:
      locale: zh_CN
-     date-format: yyyy-MM-dd HH:mm:ss
+     format:
+       date-time: yyyy-MM-dd HH:mm:ss
   profiles:
       active: prod
       include: 126
