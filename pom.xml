@@ -25,7 +25,7 @@
         <java.version>1.8</java.version>
         <commons.version>[2.6,)</commons.version>
         <druid.version>1.1.21</druid.version>
-        <fastjson.version>1.2.75</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <bootstrap.version>3.3.7</bootstrap.version>
         <jquery.version>3.3.1</jquery.version>
         <nekohtml.version>[1.9.22,)</nekohtml.version>
